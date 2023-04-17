@@ -5,10 +5,12 @@ const dev = process.argv.includes("dev");
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      fallback: "index.html",
+    }),
 
     paths: {
-      base: dev ? "" : "/build",
+      base: dev ? "" : "/sveltekit-demo-gh-pages",
     },
   },
 };
