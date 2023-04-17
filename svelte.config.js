@@ -8,7 +8,7 @@ const config = {
     adapter: adapter(),
 
     paths: {
-      base: dev ? "" : "/sveltekit-demo-gh-pages",
+      base: dev ? "" : "/build",
     },
   },
 };
