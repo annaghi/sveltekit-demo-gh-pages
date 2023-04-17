@@ -1,0 +1,8 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: annaghi/workflows/.github/workflows/nodejs-gh-pages.yml@main
