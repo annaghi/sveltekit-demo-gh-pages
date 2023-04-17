@@ -2,7 +2,8 @@
   "name": "sveltekit-demo-gh-pages",
   "version": "0.0.1",
   "type": "module",
-  "svelte": "./dist/index.js",
+  "homepage": "https://annaghi.github.io/sveltekit-demo-gh-pages",
+  "repository": "https://github.com/annaghi/sveltekit-demo-gh-pages",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
