@@ -11,6 +11,12 @@ const config = {
         paths: {
             base: "/sveltekit-demo-gh-pages",
         },
+
+        prerender: {
+            handleHttpError: ({ message }) => {
+                throw new Error(message);
+            },
+        },
     },
 };
 
