@@ -1,45 +1,51 @@
+name: Deploy to GitHub Pages
+
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: "main"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repo
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up node
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
           cache: npm
-          cache-dependency-path: package.json
 
       - name: Install dependencies
         run: npm install
 
       - name: Build site
-        run: npm run build
+        env:
+          BASE_PATH: "/sveltekit-demo-gh-pages"
+        run: |
+          npm run build
+          touch build/.nojekyll
 
-      - name: Upload build artifact
+      - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build
+          # this should match the `pages` option in your adapter-static options
+          path: "build/"
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
